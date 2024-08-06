@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:twitter_clone/components/my_drawer_tile.dart';
+import 'package:twitter_clone/pages/settings_page.dart';
 
 /*
   DRAWER
@@ -26,33 +28,82 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: SafeArea(
-        child: Column(
-          children: [
-            // app logo
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50),
-              child: Icon(
-                Icons.person,
-                size: 70,
-                color: Theme.of(context).colorScheme.primary,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: [
+              // app logo
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 50),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      size: 70,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    Text(
+                      "Amrit Tamang",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            // a divider line
-            Divider(
-              indent: 30,
-              endIndent: 30,
-              color: Theme.of(context).colorScheme.secondary,
-            )
+              // a divider line
+              Divider(
+                indent: 30,
+                endIndent: 30,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
 
-            // home
+              // home
+              MyDrawerTile(
+                title: 'H O M E',
+                icon: Icons.home,
+                onTap: () {
+                  // use pop as we are already in HomePage
+                  Navigator.pop(context);
+                },
+              ),
 
-            // profile
+              // profile
+              MyDrawerTile(
+                title: "P R O F I L E",
+                icon: Icons.person,
+                onTap: () {},
+              ),
 
-            // settings
+              // settings
+              MyDrawerTile(
+                title: "S E T T I N G S",
+                icon: Icons.settings,
+                onTap: () {
+                  // pop drawer
+                  Navigator.pop(context);
 
-            // logout
-          ],
+                  // push to SettingsPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SettingsPage(),
+                    ),
+                  );
+                },
+              ),
+
+              // logout
+              MyDrawerTile(
+                title: "L O G O U T",
+                icon: Icons.logout,
+                onTap: () {},
+              )
+            ],
+          ),
         ),
       ),
     );
